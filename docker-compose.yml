@@ -1,0 +1,55 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:13
+    container_name: ajay817-postgres
+    restart: always
+    ports:
+      - "5481:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: admin123
+      POSTGRES_DB: new_employee_db
+    volumes:
+      - pgdata817:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - ajay817-network
+
+  backend:
+    build: ./Backend
+    container_name: ajay817-backend
+    ports:
+      - "3081:3081"
+    depends_on:
+      - postgres
+    networks:
+      - ajay817-network
+
+  frontend:
+    build: ./Frontend
+    container_name: ajay817-frontend
+    ports:
+      - "8162:80"
+    depends_on:
+      - backend
+    networks:
+      - ajay817-network
+
+  hr:
+    build: ./Hr_Page
+    container_name: ajay817-hr
+    ports:
+      - "8163:80"
+    depends_on:
+      - backend
+    networks:
+      - ajay817-network
+
+volumes:
+  pgdata817:
+
+networks:
+  ajay817-network:
+
