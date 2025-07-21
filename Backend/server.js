@@ -17,13 +17,13 @@ const pool = new Pool({
 
 // Middleware
 app.use(cors({
-    origin: ['http://16.171.154.98:3081', 
+    origin: ['http://51.20.10.192:3081', 
         'http://127.0.0.1:5500',
          'http://localhost:5500',
          'http://127.0.0.1:5502',
          'http://127.0.0.1:5503',
-          'http://16.171.154.98:8162',
-          'http://16.171.154.98:8163',
+          'http://51.20.10.192:8162',
+          'http://51.20.10.192:8163',
         ],
     methods: ['GET', 'POST', 'PUT', 'OPTIONS'],
     allowedHeaders: ['Content-Type'],
@@ -186,9 +186,9 @@ app.use((err, req, res, next) => {
 // Start server
 testDatabaseConnection().then(() => {
     app.listen(port, '0.0.0.0', () => {
-        console.log(`Server running on http://16.171.154.98:${port}`);
-        console.log(`Employee Dashboard: http://16.171.154.98:${port}/`);
-        console.log(`HR Dashboard: http://16.171.154.98:${port}/hr`);
+        console.log(`Server running on http://51.20.10.192:${port}`);
+        console.log(`Employee Dashboard: http://51.20.10.192:${port}/`);
+        console.log(`HR Dashboard: http://51.20.10.192:${port}/hr`);
     });
 }).catch(err => {
     console.error('Failed to start server:', err.message);
